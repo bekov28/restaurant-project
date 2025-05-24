@@ -116,6 +116,7 @@ window.addEventListener("DOMContentLoaded", () => {
     modal.classList.add("show", "fade");
     modal.classList.remove("hide");
     document.body.style.overflow = "hidden";
+    clearInterval(modalTimerId);
   }
 
   function closeModal() {
@@ -137,11 +138,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  document.addEventListener('keydown', (event) => {
-    if(event.code === 'Escape' && modal.classList.contains('show')) {
-      closeModal()
-    } else if(event.code === 'Enter') {
-      alert('Please fill in the modal')
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Escape" && modal.classList.contains("show")) {
+      closeModal();
+    } else if (event.code === "Enter") {
+      alert("Please fill in the modal");
     }
-  })
+  });
+
+  const modalTimerId = setTimeout(openModal, 6000);
 });
