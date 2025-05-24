@@ -109,7 +109,8 @@ window.addEventListener("DOMContentLoaded", () => {
   //Modal
   const modalOpenBtns = document.querySelectorAll("[data-modal]"),
     modal = document.querySelector(".modal"),
-    modalCloseBtn = document.querySelector("[data-modal-close");
+    modalCloseBtn = document.querySelector("[data-modal-close"),
+    modalDialog = document.querySelector(".modal__dialog");
 
   function openModal() {
     modal.classList.add("show", "fade");
@@ -128,4 +129,19 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   modalCloseBtn.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (event) => {
+    console.log(event.target);
+    if (event.target === modal || event.target === modalDialog) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if(event.code === 'Escape' && modal.classList.contains('show')) {
+      closeModal()
+    } else if(event.code === 'Enter') {
+      alert('Please fill in the modal')
+    }
+  })
 });
