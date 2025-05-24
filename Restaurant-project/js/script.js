@@ -105,4 +105,27 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
   setClock(".timer", deadline);
+
+  //Modal
+  const modalOpenBtns = document.querySelectorAll("[data-modal]"),
+    modal = document.querySelector(".modal"),
+    modalCloseBtn = document.querySelector("[data-modal-close");
+
+  function openModal() {
+    modal.classList.add("show", "fade");
+    modal.classList.remove("hide");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.classList.add("hide");
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+
+  modalOpenBtns.forEach((btn) => {
+    btn.addEventListener("click", openModal);
+  });
+
+  modalCloseBtn.addEventListener("click", closeModal);
 });
