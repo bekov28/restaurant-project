@@ -65,3 +65,27 @@
 // }
 // const secondPerson = new StatusPerson('Samar', 'Badriddinov', false);
 // console.log(secondPerson);
+
+//JSON va AJAX
+
+//1. Serverga ma'lumot yuborishda aynan JSON formatda ma'lumot yuborish shart hisoblanadi.
+//Oldinlari XML ko'rinishda yuborilgan
+
+//2. Server har doim bizga JSON ko'rinishda ma'lumot qaytaradi
+
+// const person = {
+//   firstName: "Berdiyor",
+//   lastName: "Orzikulov",
+//   hobbies: {
+//     sport: "Football",
+//     games: "UFC",
+//   },
+// };
+//const objToJSON = JSON.stringify(person); // changing from object to JSON
+
+//cloning
+
+// const clone = JSON.parse(JSON.stringify(person)); //back to object
+// clone.hobbies.sport = 'Boxing'
+// console.log(clone);
+
