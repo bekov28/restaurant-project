@@ -180,13 +180,35 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const firstOffer = new OfferMenu(
-    "./img/offer1.png",
-    "Quattro Pasta",
-    "Quattro Pasta",
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
-    55,
-    20,
-    ".offers-items"
-  ).render();
+  const offers = [
+    {
+      src: "./img/offer1.png",
+      alt: "Quattro Pasta",
+      title: "Quattro Pasta",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
+      discount: 55,
+      sale: 20,
+    },
+    {
+      src: "./img/offer2.png",
+      alt: "Quattro Pasta",
+      title: "Quattro Pasta",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
+      discount: 65,
+      sale: 25,
+    },
+    {
+      src: "./img/offer3.png",
+      alt: "Quattro Pasta",
+      title: "Quattro Pasta",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
+      discount: 25,
+      sale: 15,
+    },
+  ];
+
+  offers.forEach((offer) => {
+    const { src, alt, title, desc, discount, sale } = offer;
+    new OfferMenu(src, alt, title, desc, discount, sale, ".offers-items").render();
+  });
 });
