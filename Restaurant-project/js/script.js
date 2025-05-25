@@ -147,4 +147,46 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   const modalTimerId = setTimeout(openModal, 6000);
+
+  //Class
+  class OfferMenu {
+    constructor(src, alt, title, desc, discount, sale, parentSelector) {
+      this.src = src;
+      this.alt = alt;
+      this.title = title;
+      this.desc = desc;
+      this.discount = discount;
+      this.sale = sale;
+      this.parent = document.querySelector(parentSelector);
+      this.formatToUSD();
+    }
+
+    formatToUSD() {
+      this.discount = this.discount.toLocaleString("en-US", { style: "currency", currency: "USD" });
+      this.sale = this.sale.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    }
+
+    render() {
+      const element = document.createElement("div");
+      element.innerHTML = `
+              <img src="${this.src}" alt="${this.alt}" />
+              <div>
+                <h3>${this.title}</h3>
+                <p>${this.desc}</p>
+                <p><del>${this.discount}</del><span class="primary-text">${this.sale}</span></p>
+              </div>
+      `;
+      this.parent.append(element);
+    }
+  }
+
+  const firstOffer = new OfferMenu(
+    "./img/offer1.png",
+    "Quattro Pasta",
+    "Quattro Pasta",
+    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam, quibusdam.",
+    55,
+    20,
+    ".offers-items"
+  ).render();
 });

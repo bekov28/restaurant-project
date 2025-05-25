@@ -39,29 +39,29 @@
 
 //Class ES-6 and Rest operator
 
-class Person {
-  constructor(firstName, lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-  }
+// class Person {
+//   constructor(firstName, lastName) {
+//     this.firstName = firstName;
+//     this.lastName = lastName;
+//   }
 
-  greeting() {
-    return `Full name: ${this.firstName} ${this.lastName}`;
-  }
-}
-const firstPerson = new Person("Berdiyor", "Orzikulov");
-console.log(firstPerson.greeting());
+//   greeting() {
+//     return `Full name: ${this.firstName} ${this.lastName}`;
+//   }
+// }
+// const firstPerson = new Person("Berdiyor", "Orzikulov");
+// console.log(firstPerson.greeting());
 
 //extends
 
-class StatusPerson extends Person {
-  constructor(firstName, lastName, isMarried) {
-    super(firstName, lastName);
-    this.isMarried = isMarried;
-  }
-  get() {
-    return `Full name: ${this.firstName} ${this.lastName}. Married: ${this.isMarried}`;
-  }
-}
-const secondPerson = new StatusPerson('Samar', 'Badriddinov', false);
-console.log(secondPerson);
+// class StatusPerson extends Person {
+//   constructor(firstName, lastName, isMarried) {
+//     super(firstName, lastName);
+//     this.isMarried = isMarried;
+//   }
+//   get() {
+//     return `Full name: ${this.firstName} ${this.lastName}. Married: ${this.isMarried}`;
+//   }
+// }
+// const secondPerson = new StatusPerson('Samar', 'Badriddinov', false);
+// console.log(secondPerson);
