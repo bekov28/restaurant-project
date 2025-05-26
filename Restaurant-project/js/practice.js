@@ -89,3 +89,23 @@
 // clone.hobbies.sport = 'Boxing'
 // console.log(clone);
 
+//Promise
+const statusFriend = "success";
+
+const request = new Promise((resolve, reject) => {
+  if (statusFriend === "success") {
+    resolve();
+  } else {
+    reject();
+  }
+});
+
+request
+  .then(() => {
+    console.log("My friend has arrived");
+  })
+  .then(() => {
+    console.log("We will travel together");
+  }).catch(() => {
+    console.log('My friend couldnt come')
+  }).finally('He called')
