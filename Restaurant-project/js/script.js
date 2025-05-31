@@ -211,4 +211,49 @@ window.addEventListener("DOMContentLoaded", () => {
     const { src, alt, title, desc, discount, sale } = offer;
     new OfferMenu(src, alt, title, desc, discount, sale, ".offers-items").render();
   });
+
+  //FORM
+  const form = document.querySelector("form"),
+    telegramBot = "8194994575:AAE3EVWjjbJcyYgolIZVa3FFFP78_cgaKaU",
+    chatId = "130556670";
+
+  const message = {
+    loading: "Loading...",
+    success: "Thank you for contacting us!",
+    failure: "Something went wrong",
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const statusMessage = document.createElement("div");
+    statusMessage.textContent = message.loading;
+    form.append(statusMessage);
+
+    const formData = new FormData(form);
+
+    const object = {};
+
+    formData.forEach((value, key) => {
+      object[key] = value;
+    });
+
+    fetch(`https://api.telegram.org/bot${telegramBot}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: `Name: ${object.name}, Phone: ${object.phone}`,
+      }),
+    })
+      .then(() => (statusMessage.textContent = message.success))
+      .catch(() => (statusMessage.textContent = message.failure))
+      .finally(() => {
+        setTimeout(() => {
+          statusMessage.remove();
+          form.reset();
+          closeModal();
+        }, 2000);
+      });
+  });
 });

@@ -106,6 +106,8 @@ request
   })
   .then(() => {
     console.log("We will travel together");
-  }).catch(() => {
-    console.log('My friend couldnt come')
-  }).finally('He called')
+  })
+  .catch(() => {
+    console.log("My friend couldnt come");
+  })
+  .finally("He called");
