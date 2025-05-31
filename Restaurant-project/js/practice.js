@@ -1,3 +1,5 @@
+"use strict";
+
 //Constructor
 
 // const number2 = new Number(5); //constructor
@@ -111,3 +113,10 @@ request
     console.log("My friend couldnt come");
   })
   .finally("He called");
+
+// //LocalStorage
+
+// localStorage.setItem("sammi-theme", "dark");
+
+// const theme = localStorage.getItem('sammi-theme')
+// console.log(theme)
