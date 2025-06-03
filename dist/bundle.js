@@ -52,18 +52,33 @@ function classCard(selector) {
   }
 }
 
-fetch("http://localhost:3000/offers", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((offer) => {
-        const { src, alt, descr, discount, sale, title } = offer;
-        new OfferMenu(src, alt, title, descr, discount, sale, selector).render();
-      });
-    });
+// fetch("http://localhost:3000/offers", {
+//     method: "GET",
+//     headers: { "Content-Type": "application/json" },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       data.forEach((offer) => {
+//         const { src, alt, descr, discount, sale, title } = offer;
+//         new OfferMenu(src, alt, title, descr, discount, sale, selector).render();
+//       });
+//     }).catch(e=> console.log(e)).finally(() => console.log('finally'))
 
+async function fetchData() {
+  try {
+    const response = await fetch("http://localhost:3000/offers");
+    const data = await response.json();
+    data.forEach((offer) => {
+      const { src, alt, descr, discount, sale, title } = offer;
+      new OfferMenu(src, alt, title, descr, discount, sale, selector).render();
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    console.log('Finally')
+  }
+}
+fetchData();
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (classCard);
 
@@ -111,21 +126,42 @@ function forms(formSelector, modalTimerId) {
       object[key] = value;
     });
 
-    fetch(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: `Name: ${object.name}. Phone: ${object.phone}`,
-      }),
-    })
-      .then(() => {
-        showStatusMessage(message.success);
-        form.reset();
-      })
-      .catch(() => showStatusMessage(message.failure))
-      .finally(() => loader.remove());
+    // fetch(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     chat_id: chatId,
+    //     text: `Name: ${object.name}. Phone: ${object.phone}`,
+    //   }),
+    // })
+    //   .then(() => {
+    //     showStatusMessage(message.success);
+    //     form.reset();
+    //   })
+    //   .catch(() => showStatusMessage(message.failure))
+    //   .finally(() => loader.remove());
+
+    getData(loader, object);
   });
+
+  async function getData(loader, object) {
+    try {
+      await fetch(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: `Name: ${object.name}. Phone: ${object.phone}`,
+        }),
+      });
+      showStatusMessage(message.success);
+    } catch {
+      showStatusMessage(message.failure);
+    } finally {
+      loader.remove();
+      form.reset();
+    }
+  }
 
   function showStatusMessage(message) {
     const modalDialog = document.querySelector(".modal__dialog");
@@ -151,6 +187,7 @@ function forms(formSelector, modalTimerId) {
     }, 4000);
   }
 }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (forms);
 
 

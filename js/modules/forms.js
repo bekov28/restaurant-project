@@ -28,21 +28,42 @@ function forms(formSelector, modalTimerId) {
       object[key] = value;
     });
 
-    fetch(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: `Name: ${object.name}. Phone: ${object.phone}`,
-      }),
-    })
-      .then(() => {
-        showStatusMessage(message.success);
-        form.reset();
-      })
-      .catch(() => showStatusMessage(message.failure))
-      .finally(() => loader.remove());
+    // fetch(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     chat_id: chatId,
+    //     text: `Name: ${object.name}. Phone: ${object.phone}`,
+    //   }),
+    // })
+    //   .then(() => {
+    //     showStatusMessage(message.success);
+    //     form.reset();
+    //   })
+    //   .catch(() => showStatusMessage(message.failure))
+    //   .finally(() => loader.remove());
+
+    getData(loader, object);
   });
+
+  async function getData(loader, object) {
+    try {
+      await fetch(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: `Name: ${object.name}. Phone: ${object.phone}`,
+        }),
+      });
+      showStatusMessage(message.success);
+    } catch {
+      showStatusMessage(message.failure);
+    } finally {
+      loader.remove();
+      form.reset();
+    }
+  }
 
   function showStatusMessage(message) {
     const modalDialog = document.querySelector(".modal__dialog");
@@ -68,4 +89,5 @@ function forms(formSelector, modalTimerId) {
     }, 4000);
   }
 }
+
 export default forms;

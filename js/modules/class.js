@@ -38,17 +38,32 @@ function classCard(selector) {
   }
 }
 
-fetch("http://localhost:3000/offers", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((offer) => {
-        const { src, alt, descr, discount, sale, title } = offer;
-        new OfferMenu(src, alt, title, descr, discount, sale, selector).render();
-      });
-    });
+// fetch("http://localhost:3000/offers", {
+//     method: "GET",
+//     headers: { "Content-Type": "application/json" },
+//   })
+//     .then((response) => response.json())
+//     .then((data) => {
+//       data.forEach((offer) => {
+//         const { src, alt, descr, discount, sale, title } = offer;
+//         new OfferMenu(src, alt, title, descr, discount, sale, selector).render();
+//       });
+//     }).catch(e=> console.log(e)).finally(() => console.log('finally'))
 
+async function fetchData() {
+  try {
+    const response = await fetch("http://localhost:3000/offers");
+    const data = await response.json();
+    data.forEach((offer) => {
+      const { src, alt, descr, discount, sale, title } = offer;
+      new OfferMenu(src, alt, title, descr, discount, sale, selector).render();
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    console.log('Finally')
+  }
+}
+fetchData();
 
 export default classCard;
